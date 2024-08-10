@@ -1,8 +1,38 @@
-# React + Vite
+# 프로젝트 주제
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2024 파리 올림픽에서 각 나라가 획득한 메달 수를 추적하는 Olympic Medal Tracker 만들기
 
-Currently, two official plugins are available:
+# 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [ ] 레이아웃의 최대 넓이는 1200px, 최소 넓이는 800px 로 제한
+- [ ] 레이아웃은 가운데 정렬
+- [ ] 나라이름, 금은동 메달 수를 입력할 수 있는 제출 폼 UI 구현
+- [ ] 등록 : 새로운 나라와 그 나라가 획득한 메달 수를 추가
+- [ ] 조회 : 나라별 메달 집계 리스트 보여주기
+- [ ] 수정 : 기존에 추가된 나라의 메달 수를 수정하기
+- [ ] 삭제 : 나라 정보 삭제하기
+- [ ] 정렬 : 메달 집계는 금메달 수를 기준으로 내림차순 정렬하기
+
+# 도전 기능
+
+- [ ] 나라 이름 입력했을 때 이미 등록된 국가라면 alert 메시지 띄우기
+- [ ] 입력된 국가가 등록되지 않은 경우 alert 메시지
+- [ ] 메달 총 개수 보여주고, 메달 총 개수대로 정렬
+- [ ] 로컬스토리지에 입력한 정보를 항상 업데이트
+- [ ] 메달 정보에 관한 useState 의 초기값을 항상 로컬스토리지에서 가져오기
+
+# why
+
+1. **JSX 문법**이란 무엇일까요?
+
+2. 사용자가 입력하는 값, 또는 이미 입력된 값, 메달 정보와 같은 **애플리케이션의 상태를 관리하기(추가, 변경, 삭제) 위해 리액트의 어떤 기능을 사용하셨나요**?
+
+3. 애플리케이션의 **상태 값들을 컴포넌트 간 어떤 방식으로 공유하셨나요**?
+
+4. 기능 구현을 위해 **불변성 유지가** 필요한 부분이 있었다면 하나만 설명해 주세요.
+
+5. 반복되는 컴포넌트를 파악하고 재사용할 수 있는 **컴포넌트로 분리해 보셨나요?** 그렇다면 **어떠한 이점이 있었나요?**
+
+# 컴포넌트 구조
+
+TODO 분리한 컴포넌트 정리
