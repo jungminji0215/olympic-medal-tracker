@@ -4,14 +4,18 @@ import MedalFormComponent from "./components/MedalFormComponent.jsx";
 import MedalListComponent from "./components/MedalListComponent.jsx";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const [countries, setCountry] = useState([]);
 
   return (
     <div className="container">
       <section>
         <h1>2024 파리 올림픽</h1>
-        <MedalFormComponent />
-        <MedalListComponent />
+        <MedalFormComponent countries={countries} setCountry={setCountry} />
+        {countries.map((country) => {
+          return (
+            <MedalListComponent key={country.countryName} country={country} />
+          );
+        })}
       </section>
     </div>
   );
