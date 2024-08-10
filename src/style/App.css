@@ -1,0 +1,46 @@
+table {
+  list-style: none;
+}
+/* TODO css 스타일 적용 방법 */
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  /* 나중에 없애보기 */
+  text-align: center;
+}
+
+section {
+  max-width: 1200px;
+  min-width: 800px;
+  background-color: bisque;
+}
+
+/* form-component */
+.form-component {
+  display: flex;
+  justify-content: center;
+  background-color: green;
+}
+
+.input-form {
+  display: flex;
+}
+
+.input-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* medal-list-component */
+.medal-list-component {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: aqua;
+}
+
+.medal-list-component table {
+  /* border: 1; */
+}
