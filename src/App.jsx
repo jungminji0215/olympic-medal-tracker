@@ -13,7 +13,12 @@ function App() {
         <MedalFormComponent countries={countries} setCountry={setCountry} />
         {countries.map((country) => {
           return (
-            <MedalListComponent key={country.countryName} country={country} />
+            <MedalListComponent
+              key={country.countryName}
+              country={country}
+              countries={countries}
+              setCountry={setCountry}
+            />
           );
         })}
       </section>

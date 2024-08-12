@@ -1,6 +1,14 @@
 import React from "react";
 
-const MedalListComponent = ({ country }) => {
+const MedalListComponent = ({ country, countries, setCountry }) => {
+  const deleteCountry = () => {
+    let filterCountry = countries.filter((c) => {
+      return c.countryName !== country.countryName;
+    });
+
+    setCountry(filterCountry);
+  };
+
   return (
     <div className="medal-list-component">
       <table>
@@ -14,14 +22,14 @@ const MedalListComponent = ({ country }) => {
           </tr>
         </thead>
         <tbody>
-          <MedalListItem country={country} />
+          <MedalListItem country={country} deleteCountry={deleteCountry} />
         </tbody>
       </table>
     </div>
   );
 };
 
-const MedalListItem = ({ country }) => {
+const MedalListItem = ({ country, deleteCountry }) => {
   return (
     <tr>
       <td>{country.countryName}</td>
@@ -29,7 +37,7 @@ const MedalListItem = ({ country }) => {
       <td>{country.silverMedal}</td>
       <td>{country.bronzeMedal}</td>
       <td>
-        <button>삭제</button>
+        <button onClick={deleteCountry}>삭제</button>
       </td>
     </tr>
   );

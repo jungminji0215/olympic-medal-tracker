@@ -7,15 +7,48 @@ const MedalFormComponent = ({ countries, setCountry }) => {
   let [bronzeMedal, setBronzeMedal] = useState(0);
 
   const addCountry = () => {
-    const updateCountries = [...countries];
-    const addCountry = {
+    // TODO 로컬스토리지에 저장
+    const copyCountries = [...countries];
+
+    let findCountry = copyCountries.find((country) => {
+      return country.countryName === countryName;
+    });
+
+    if (findCountry) {
+      alert("이미 등록된 나라입니다.");
+      return;
+    }
+
+    const newCountry = {
       countryName: countryName,
       goldMedal: goldMedal,
       silverMedal: silverMedal,
       bronzeMedal: bronzeMedal,
     };
-    updateCountries.push(addCountry);
-    setCountry(updateCountries);
+    copyCountries.push(newCountry);
+    setCountry(copyCountries);
+  };
+
+  const updateCountry = () => {
+    // 기존에 존재하던 국가 조회
+    const copyCountries = [...countries];
+
+    let findCountry = copyCountries.find((country) => {
+      return country.countryName === countryName;
+    });
+
+    if (!findCountry) {
+      alert("등록되어있지 않은 나라입니다!");
+      return;
+    }
+
+    // TODO 이게 맞는지 확인..
+    // 조회한 국가의 값 변경
+    findCountry.goldMedal = goldMedal;
+    findCountry.silverMedal = silverMedal;
+    findCountry.bronzeMedal = bronzeMedal;
+
+    setCountry(copyCountries);
   };
 
   return (
@@ -27,7 +60,7 @@ const MedalFormComponent = ({ countries, setCountry }) => {
         <InputForm title={"동메달"} type={"number"} setValue={setBronzeMedal} />
       </div>
       <Button action={"국가 추가"} onClick={addCountry} />
-      <Button action={"업데이트"} />
+      <Button action={"업데이트"} onClick={updateCountry} />
     </div>
   );
 };
