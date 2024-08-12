@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "../style/MedalListComponent.module.css";
 
-const MedalListComponent = ({ country, countries, setCountry }) => {
-  const deleteCountry = () => {
+const MedalListComponent = ({ countries, setCountry }) => {
+  const deleteCountry = (countryName) => {
     let filterCountry = countries.filter((c) => {
-      return c.countryName !== country.countryName;
+      return c.countryName !== countryName;
     });
 
     setCountry(filterCountry);
@@ -24,7 +24,25 @@ const MedalListComponent = ({ country, countries, setCountry }) => {
           </tr>
         </thead>
         <tbody>
-          <MedalListItem country={country} deleteCountry={deleteCountry} />
+          {countries
+            .sort((a, b) => {
+              if (b.goldMedal !== a.goldMedal) {
+                return b.goldMedal - a.goldMedal;
+              } else if (b.silverMedal !== a.silverMedal) {
+                return b.silverMedal - a.silverMedal;
+              }
+
+              return b.bronzeMedal - a.bronzeMedal;
+            })
+            .map((country) => {
+              return (
+                <MedalListItem
+                  key={country.countryName}
+                  country={country}
+                  deleteCountry={deleteCountry}
+                />
+              );
+            })}
         </tbody>
       </table>
     </div>
@@ -40,7 +58,14 @@ const MedalListItem = ({ country, deleteCountry }) => {
       <td>{country.bronzeMedal}</td>
       <td>{"작업중"}</td>
       <td>
-        <button onClick={deleteCountry}>삭제</button>
+        <button
+          className={styles.deleteButton}
+          onClick={() => {
+            deleteCountry(country.countryName);
+          }}
+        >
+          삭제
+        </button>
       </td>
     </tr>
   );

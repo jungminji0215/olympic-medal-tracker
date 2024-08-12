@@ -1,7 +1,6 @@
 .formComponent {
   display: flex;
   justify-content: center;
-  /* background-color: green; */
   gap: 10px;
   margin: 20px 0;
 }
@@ -17,7 +16,7 @@
 }
 
 .formButton {
-  background-color: rgb(28, 92, 156);
+  background-color: orange;
   border: none;
   margin-top: 15px;
   height: 30px;

@@ -1,10 +1,32 @@
 .medalListComponent {
-  /* margin-top: 20px; */
+  margin-top: 40px;
   display: flex;
   justify-content: center;
-  background-color: aqua;
 }
 
-.medalListComponent table {
-  /* border: 1; */
+.deleteButton {
+  background-color: red;
+  border: none;
+
+  height: 30px;
+  width: 56px;
+  border-radius: 5px;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: rgb(70, 139, 208);
+}
+
+th,
+td {
+  padding: 10px 40px;
+}
+
+td {
+  background-color: rgb(239, 239, 246);
 }
