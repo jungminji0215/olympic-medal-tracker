@@ -1,0 +1,10 @@
+.medalListComponent {
+  /* margin-top: 20px; */
+  display: flex;
+  justify-content: center;
+  background-color: aqua;
+}
+
+.medalListComponent table {
+  /* border: 1; */
+}

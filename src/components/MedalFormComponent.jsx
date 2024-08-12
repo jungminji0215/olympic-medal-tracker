@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../style/MedalFormComponent.module.css";
 
 const MedalFormComponent = ({ countries, setCountry }) => {
   let [countryName, setCountryName] = useState("");
@@ -6,7 +7,16 @@ const MedalFormComponent = ({ countries, setCountry }) => {
   let [silverMedal, setSilverMedal] = useState(0);
   let [bronzeMedal, setBronzeMedal] = useState(0);
 
-  const addCountry = () => {
+  const resetMedalInfo = () => {
+    setCountryName("");
+    setGoldMedal(0);
+    setSilverMedal(0);
+    setBronzeMedal(0);
+  };
+
+  const addCountry = (e) => {
+    e.preventDefault();
+
     // TODO 로컬스토리지에 저장
     const copyCountries = [...countries];
 
@@ -27,10 +37,13 @@ const MedalFormComponent = ({ countries, setCountry }) => {
     };
     copyCountries.push(newCountry);
     setCountry(copyCountries);
+
+    resetMedalInfo();
   };
 
-  const updateCountry = () => {
-    // 기존에 존재하던 국가 조회
+  const updateCountry = (e) => {
+    e.preventDefault();
+
     const copyCountries = [...countries];
 
     let findCountry = copyCountries.find((country) => {
@@ -49,37 +62,53 @@ const MedalFormComponent = ({ countries, setCountry }) => {
     findCountry.bronzeMedal = bronzeMedal;
 
     setCountry(copyCountries);
+    resetMedalInfo();
   };
 
   return (
-    <div className="form-component">
-      <div className="input-form">
-        <InputForm title={"국가명"} type={"text"} setValue={setCountryName} />
-        <InputForm title={"금메달"} type={"number"} setValue={setGoldMedal} />
-        <InputForm title={"은메달"} type={"number"} setValue={setSilverMedal} />
-        <InputForm title={"동메달"} type={"number"} setValue={setBronzeMedal} />
+    <form className={styles.formComponent}>
+      <div className={styles.inputForm}>
+        <InputForm
+          title={"국가명"}
+          type={"text"}
+          value={countryName}
+          setValue={setCountryName}
+        />
+        <InputForm
+          title={"금메달"}
+          type={"number"}
+          value={goldMedal}
+          setValue={setGoldMedal}
+        />
+        <InputForm
+          title={"은메달"}
+          type={"number"}
+          value={silverMedal}
+          setValue={setSilverMedal}
+        />
+        <InputForm
+          title={"동메달"}
+          type={"number"}
+          value={bronzeMedal}
+          setValue={setBronzeMedal}
+        />
       </div>
       <Button action={"국가 추가"} onClick={addCountry} />
       <Button action={"업데이트"} onClick={updateCountry} />
-    </div>
+    </form>
   );
 };
 
-const InputForm = ({ title, type, setValue }) => {
+const InputForm = ({ title, type, value, setValue }) => {
   return (
-    <div className="input-item">
+    <div className={styles.inputItem}>
       <span>{title}</span>
       <input
+        className={styles.inputFormStyle}
+        value={value}
+        placeholder={"국가명 입력"}
         onChange={(e) => {
-          if (title === "국가명") {
-            setValue(e.target.value);
-          } else if (title === "금메달") {
-            setValue(e.target.value);
-          } else if (title === "은메달") {
-            setValue(e.target.value);
-          } else {
-            setValue(e.target.value);
-          }
+          setValue(e.target.value);
         }}
         type={type}
       />
@@ -88,7 +117,17 @@ const InputForm = ({ title, type, setValue }) => {
 };
 
 const Button = ({ action, onClick }) => {
-  return <button onClick={onClick}>{action}</button>;
+  return (
+    <button
+      className={styles.formButton}
+      onClick={(e) => {
+        onClick(e);
+      }}
+      type="submit"
+    >
+      {action}
+    </button>
+  );
 };
 
 export default MedalFormComponent;

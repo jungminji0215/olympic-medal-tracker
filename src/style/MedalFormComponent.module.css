@@ -1,0 +1,33 @@
+.formComponent {
+  display: flex;
+  justify-content: center;
+  /* background-color: green; */
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.inputForm {
+  display: flex;
+  gap: 10px;
+}
+
+.inputItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.formButton {
+  background-color: rgb(28, 92, 156);
+  border: none;
+  margin-top: 15px;
+  height: 30px;
+  width: 56px;
+  border-radius: 5px;
+  color: white;
+}
+
+.inputFormStyle {
+  height: 25px;
+  border-radius: 5px;
+  padding: 0 5px;
+}
