@@ -82,7 +82,6 @@ const MedalForm = ({ countries, setCountry }) => {
       return;
     }
 
-    // TODO 이게 맞는지 확인..
     findCountry.goldMedal = goldMedal;
     findCountry.silverMedal = silverMedal;
     findCountry.bronzeMedal = bronzeMedal;
