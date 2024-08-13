@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import styles from "../style/MedalFormComponent.module.css";
+import styles from "../style/MedalForm.module.css";
+import { validateForm } from "../validateForm.js";
+import { saveLocalStorage } from "../localStorage.js";
 
-const MedalFormComponent = ({ countries, setCountry }) => {
+const MedalForm = ({ countries, setCountry }) => {
+  /**
+   * TODO 고민
+   * 이것들을 하나의 상태로 합쳤으면 좋았을 것 같다.
+   */
   let [countryName, setCountryName] = useState("");
   let [goldMedal, setGoldMedal] = useState(0);
   let [silverMedal, setSilverMedal] = useState(0);
@@ -14,13 +20,24 @@ const MedalFormComponent = ({ countries, setCountry }) => {
     setBronzeMedal(0);
   };
 
+  /**
+   * 등록
+   */
   const addCountry = (e) => {
     e.preventDefault();
 
-    // TODO 로컬스토리지에 저장
+    const { isValid, message } = validateForm(
+      countryName,
+      goldMedal,
+      silverMedal,
+      bronzeMedal
+    );
+    if (!isValid) return alert(message);
+
+    // 불변성 유지를 위해 기존 리스트를 복사하여 사용
     const copyCountries = [...countries];
 
-    let findCountry = copyCountries.find((country) => {
+    let findCountry = countries.find((country) => {
       return country.countryName === countryName;
     });
 
@@ -35,12 +52,22 @@ const MedalFormComponent = ({ countries, setCountry }) => {
       silverMedal: silverMedal,
       bronzeMedal: bronzeMedal,
     };
+
+    /**
+     * TODO 고민 및 궁금증
+     * 아래 세 단계는 하나만 실패해도 데이터 정합성에 문제가 생길 것 같은데..(아닌가?)
+     * try catch 같은거로 하나로 묶어서 동작해주어야 하나?
+     */
     copyCountries.push(newCountry);
     setCountry(copyCountries);
+    saveLocalStorage(copyCountries);
 
     resetMedalInfo();
   };
 
+  /**
+   * 수정
+   */
   const updateCountry = (e) => {
     e.preventDefault();
 
@@ -56,12 +83,13 @@ const MedalFormComponent = ({ countries, setCountry }) => {
     }
 
     // TODO 이게 맞는지 확인..
-    // 조회한 국가의 값 변경
     findCountry.goldMedal = goldMedal;
     findCountry.silverMedal = silverMedal;
     findCountry.bronzeMedal = bronzeMedal;
 
+    saveLocalStorage(copyCountries);
     setCountry(copyCountries);
+
     resetMedalInfo();
   };
 
@@ -130,4 +158,4 @@ const Button = ({ action, onClick }) => {
   );
 };
 
-export default MedalFormComponent;
+export default MedalForm;
