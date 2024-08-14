@@ -1,20 +1,23 @@
-.formComponent {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
-}
-
 .inputForm {
   display: flex;
+  justify-content: center;
+  margin: 20px 0;
   gap: 10px;
 }
 
 .inputItem {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
+.inputFormStyle {
+  height: 25px;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+/* 버튼 */
 .formButton {
   background-color: orange;
   border: none;
@@ -23,10 +26,5 @@
   width: 56px;
   border-radius: 5px;
   color: white;
-}
-
-.inputFormStyle {
-  height: 25px;
-  border-radius: 5px;
-  padding: 0 5px;
+  cursor: pointer;
 }

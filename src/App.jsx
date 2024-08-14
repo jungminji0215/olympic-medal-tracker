@@ -20,17 +20,15 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <section>
-        <h1>2024 파리 올림픽</h1>
-        <MedalForm countries={countries} setCountry={setCountry} />
+    <div className="main-container">
+      <h1>2024 파리 올림픽</h1>
+      <MedalForm countries={countries} setCountry={setCountry} />
 
-        {countries.length ? (
-          <CountryList countries={countries} setCountry={setCountry} />
-        ) : (
-          "아직 추가된 국가가 없습니다. 메달을 추적하세요!"
-        )}
-      </section>
+      {countries.length ? (
+        <CountryList countries={countries} setCountry={setCountry} />
+      ) : (
+        "아직 추가된 국가가 없습니다. 메달을 추적하세요!"
+      )}
     </div>
   );
 }

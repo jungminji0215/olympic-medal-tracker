@@ -100,33 +100,33 @@ const MedalForm = ({ countries, setCountry }) => {
   };
 
   return (
-    <form className={styles.formComponent}>
-      <div className={styles.inputForm}>
-        <InputForm
-          title={"국가명"}
-          type={"text"}
-          value={countryName}
-          setValue={setCountryName}
-        />
-        <InputForm
-          title={"금메달"}
-          type={"number"}
-          value={goldMedal}
-          setValue={setGoldMedal}
-        />
-        <InputForm
-          title={"은메달"}
-          type={"number"}
-          value={silverMedal}
-          setValue={setSilverMedal}
-        />
-        <InputForm
-          title={"동메달"}
-          type={"number"}
-          value={bronzeMedal}
-          setValue={setBronzeMedal}
-        />
-      </div>
+    <form className={styles.inputForm}>
+      {/* <div className={styles.inputForm}> */}
+      <InputForm
+        title={"국가명"}
+        type={"text"}
+        value={countryName}
+        setValue={setCountryName}
+      />
+      <InputForm
+        title={"금메달"}
+        type={"number"}
+        value={goldMedal}
+        setValue={setGoldMedal}
+      />
+      <InputForm
+        title={"은메달"}
+        type={"number"}
+        value={silverMedal}
+        setValue={setSilverMedal}
+      />
+      <InputForm
+        title={"동메달"}
+        type={"number"}
+        value={bronzeMedal}
+        setValue={setBronzeMedal}
+      />
+      {/* </div> */}
       <Button action={"국가 추가"} onClick={addCountry} />
       <Button action={"업데이트"} onClick={updateCountry} />
     </form>
@@ -136,7 +136,7 @@ const MedalForm = ({ countries, setCountry }) => {
 const InputForm = ({ title, type, value, setValue }) => {
   return (
     <div className={styles.inputItem}>
-      <span>{title}</span>
+      <label>{title}</label>
       <input
         className={styles.inputFormStyle}
         value={value}
@@ -152,15 +152,17 @@ const InputForm = ({ title, type, value, setValue }) => {
 
 const Button = ({ action, onClick }) => {
   return (
-    <button
-      className={styles.formButton}
-      onClick={(e) => {
-        onClick(e);
-      }}
-      type="submit"
-    >
-      {action}
-    </button>
+    <div>
+      <button
+        className={styles.formButton}
+        onClick={(e) => {
+          onClick(e);
+        }}
+        type="submit"
+      >
+        {action}
+      </button>
+    </div>
   );
 };
 
