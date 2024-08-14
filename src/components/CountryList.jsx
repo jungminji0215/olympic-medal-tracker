@@ -13,7 +13,6 @@ const CountryList = ({ countries, setCountry }) => {
     });
 
     /**
-     * TODO 고민
      * localStorage 에 있는 데이터를 삭제하는 메서드가 있는데(removeItem())
      * removeItem 를 사용하지 않고, 삭제할 국가를 필터한 filterCountry 리스트를
      * 새로 저장하는 방식으로 했는데, 이러한 방식이 잘못된 것은 아닌지...
@@ -65,7 +64,7 @@ const CountryList = ({ countries, setCountry }) => {
 
 const MedalListItem = ({ country, deleteCountry }) => {
   return (
-    <tr>
+    <tr key={country.countryName}>
       <td>{country.countryName}</td>
       <td>{country.goldMedal}</td>
       <td>{country.silverMedal}</td>

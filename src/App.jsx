@@ -8,7 +8,6 @@ function App() {
   const [countries, setCountry] = useState([]);
 
   /**
-   * TODO 고민
    * 저장소 접근하는 것이 여기로 나와있는 것이 아쉽다.
    * MedalForm, CountryList 를 품고있는 컴포넌트를 따로 만들었어야했나?
    */
