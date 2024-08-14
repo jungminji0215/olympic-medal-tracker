@@ -5,7 +5,6 @@ import { saveLocalStorage } from "../localStorage.js";
 
 const MedalForm = ({ countries, setCountry }) => {
   /**
-   * TODO 고민
    * 이것들을 하나의 상태로 합쳤으면 좋았을 것 같다.
    */
   let [countryName, setCountryName] = useState("");
@@ -42,8 +41,7 @@ const MedalForm = ({ countries, setCountry }) => {
   };
 
   // 국가 리스트 업데이트 함수
-  const updateCountryList = (newCountry) => {
-    const updatedCountries = [...countries, newCountry];
+  const updateCountryList = (updatedCountries) => {
     setCountry(updatedCountries);
     saveLocalStorage(updatedCountries);
   };
@@ -63,8 +61,8 @@ const MedalForm = ({ countries, setCountry }) => {
     if (!isValid) return alert(message);
 
     if (isExistCountry()) return alert("이미 등록된 나라입니다.");
+
     try {
-      // 새로운 국가 데이터 생성
       const newCountry = createCountryObject(
         countryName,
         goldMedal,
@@ -72,10 +70,7 @@ const MedalForm = ({ countries, setCountry }) => {
         bronzeMedal
       );
 
-      // 상태 업데이트 및 로컬 스토리지 저장
-      updateCountryList(newCountry);
-
-      // 메달 정보 리셋
+      updateCountryList([...countries, newCountry]);
       resetMedalInfo();
     } catch (error) {
       alert("국가를 추가하는 중에 오류가 발생했습니다. 다시 시도해 주세요.");
@@ -96,25 +91,27 @@ const MedalForm = ({ countries, setCountry }) => {
     );
     if (!isValid) return alert(message);
 
-    const copyCountries = [...countries];
+    if (!isExistCountry()) return alert("등록되어있지 않은 나라입니다.");
 
-    let findCountry = copyCountries.find((country) => {
-      return country.countryName === countryName;
-    });
+    try {
+      const newCountries = countries.map((country) => {
+        if (country.countryName === countryName) {
+          return {
+            countryName: countryName,
+            goldMedal: goldMedal,
+            silverMedal: silverMedal,
+            bronzeMedal: bronzeMedal,
+          };
+        } else {
+          return country;
+        }
+      });
 
-    if (!findCountry) {
-      alert("등록되어있지 않은 나라입니다!");
-      return;
+      updateCountryList(newCountries);
+      resetMedalInfo();
+    } catch (error) {
+      alert("국가를 추가하는 중에 오류가 발생했습니다. 다시 시도해 주세요.");
     }
-
-    findCountry.goldMedal = goldMedal;
-    findCountry.silverMedal = silverMedal;
-    findCountry.bronzeMedal = bronzeMedal;
-
-    saveLocalStorage(copyCountries);
-    setCountry(copyCountries);
-
-    resetMedalInfo();
   };
 
   return (
