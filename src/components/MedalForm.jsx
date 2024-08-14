@@ -20,6 +20,34 @@ const MedalForm = ({ countries, setCountry }) => {
     setBronzeMedal(0);
   };
 
+  const isExistCountry = () => {
+    return countries.find((country) => {
+      return country.countryName === countryName;
+    });
+  };
+
+  // 새로운 국가 객체 생성 함수
+  const createCountryObject = (
+    countryName,
+    goldMedal,
+    silverMedal,
+    bronzeMedal
+  ) => {
+    return {
+      countryName: countryName,
+      goldMedal: goldMedal,
+      silverMedal: silverMedal,
+      bronzeMedal: bronzeMedal,
+    };
+  };
+
+  // 국가 리스트 업데이트 함수
+  const updateCountryList = (newCountry) => {
+    const updatedCountries = [...countries, newCountry];
+    setCountry(updatedCountries);
+    saveLocalStorage(updatedCountries);
+  };
+
   /**
    * 등록
    */
@@ -34,34 +62,24 @@ const MedalForm = ({ countries, setCountry }) => {
     );
     if (!isValid) return alert(message);
 
-    const copyCountries = [...countries];
+    if (isExistCountry()) return alert("이미 등록된 나라입니다.");
+    try {
+      // 새로운 국가 데이터 생성
+      const newCountry = createCountryObject(
+        countryName,
+        goldMedal,
+        silverMedal,
+        bronzeMedal
+      );
 
-    let findCountry = countries.find((country) => {
-      return country.countryName === countryName;
-    });
+      // 상태 업데이트 및 로컬 스토리지 저장
+      updateCountryList(newCountry);
 
-    if (findCountry) {
-      alert("이미 등록된 나라입니다.");
-      return;
+      // 메달 정보 리셋
+      resetMedalInfo();
+    } catch (error) {
+      alert("국가를 추가하는 중에 오류가 발생했습니다. 다시 시도해 주세요.");
     }
-
-    const newCountry = {
-      countryName: countryName,
-      goldMedal: goldMedal,
-      silverMedal: silverMedal,
-      bronzeMedal: bronzeMedal,
-    };
-
-    /**
-     * TODO 고민 및 궁금증
-     * 아래 세 단계는 하나만 실패해도 데이터 정합성에 문제가 생길 것 같은데..(아닌가?)
-     * try catch 같은거로 하나로 묶어서 동작해주어야 하나?
-     */
-    copyCountries.push(newCountry);
-    setCountry(copyCountries);
-    saveLocalStorage(copyCountries);
-
-    resetMedalInfo();
   };
 
   /**
@@ -101,7 +119,6 @@ const MedalForm = ({ countries, setCountry }) => {
 
   return (
     <form className={styles.inputForm}>
-      {/* <div className={styles.inputForm}> */}
       <InputForm
         title={"국가명"}
         type={"text"}
@@ -126,7 +143,6 @@ const MedalForm = ({ countries, setCountry }) => {
         value={bronzeMedal}
         setValue={setBronzeMedal}
       />
-      {/* </div> */}
       <Button action={"국가 추가"} onClick={addCountry} />
       <Button action={"업데이트"} onClick={updateCountry} />
     </form>
@@ -152,17 +168,15 @@ const InputForm = ({ title, type, value, setValue }) => {
 
 const Button = ({ action, onClick }) => {
   return (
-    <div>
-      <button
-        className={styles.formButton}
-        onClick={(e) => {
-          onClick(e);
-        }}
-        type="submit"
-      >
-        {action}
-      </button>
-    </div>
+    <button
+      className={styles.formButton}
+      onClick={(e) => {
+        onClick(e);
+      }}
+      type="submit"
+    >
+      {action}
+    </button>
   );
 };
 
