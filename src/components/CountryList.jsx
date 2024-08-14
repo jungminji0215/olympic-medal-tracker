@@ -70,7 +70,11 @@ const MedalListItem = ({ country, deleteCountry }) => {
       <td>{country.goldMedal}</td>
       <td>{country.silverMedal}</td>
       <td>{country.bronzeMedal}</td>
-      <td>{"작업중"}</td>
+      <td>
+        {Number(country.goldMedal) +
+          Number(country.silverMedal) +
+          Number(country.bronzeMedal)}
+      </td>
       <td>
         <button
           className={styles.deleteButton}
