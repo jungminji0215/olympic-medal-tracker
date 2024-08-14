@@ -34,7 +34,6 @@ const MedalForm = ({ countries, setCountry }) => {
     );
     if (!isValid) return alert(message);
 
-    // 불변성 유지를 위해 기존 리스트를 복사하여 사용
     const copyCountries = [...countries];
 
     let findCountry = countries.find((country) => {
@@ -70,6 +69,14 @@ const MedalForm = ({ countries, setCountry }) => {
    */
   const updateCountry = (e) => {
     e.preventDefault();
+
+    const { isValid, message } = validateForm(
+      countryName,
+      goldMedal,
+      silverMedal,
+      bronzeMedal
+    );
+    if (!isValid) return alert(message);
 
     const copyCountries = [...countries];
 
